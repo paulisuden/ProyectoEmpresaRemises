@@ -11,6 +11,9 @@ import com.uncuyo.proyecto.model.Reserva;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.table.AbstractTableModel;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -145,23 +148,28 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btModificarRMouseClicked
 
     private void btConsultarRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btConsultarRMouseClicked
-        this.dispose(); 
+        Tablas.main(new String[0]);
     }//GEN-LAST:event_btConsultarRMouseClicked
 
     private void btSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalirMouseClicked
         this.dispose(); 
     }//GEN-LAST:event_btSalirMouseClicked
 
-    
-    
-    /**public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrame().setVisible(true);
-            }
-        });
+
+    public static void main(String[] args) {
+         // Crear una instancia de MainFrame
+        MainFrame mainFrame = new MainFrame();
+       
         
-    }*/
+        // Configurar la operación de cierre de la ventana principal
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // Mostrar la ventana principal
+        mainFrame.setVisible(true);
+        mainFrame.setLocationRelativeTo(null);
+    }
+    
+
     
     public Cliente setDatosCliente(String nombre, String dni,String celular, String ubicacion, Long cod_cliente){
         System.out.println(nombre + " - " + dni + " " + celular + " " + ubicacion );
@@ -182,9 +190,8 @@ public class MainFrame extends javax.swing.JFrame {
         Reserva reserva = new Reserva(cod_reserva, destino, fechaReserva, horaReserva);
         reserva.setCliente(cliente);
         reservactrl.insertarReserva(reserva);
-        System.out.println("AHORAAAAAAAAAAAAAAAAAAAAA");
-        System.out.println(reserva.getCliente());
     }
+   
     
     //private MainFrame mainframe;
     private final ReservaController reservactrl = new ReservaController();
