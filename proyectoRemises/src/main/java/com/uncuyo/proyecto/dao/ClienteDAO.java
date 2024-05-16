@@ -13,4 +13,5 @@ public interface ClienteDAO {
     public void eliminarCliente(Cliente cliente);
     public List<Cliente> getClientes();
     public Cliente getClientes(Long cod_cliente);
+    public Long ultimoCodCliente();
 }   

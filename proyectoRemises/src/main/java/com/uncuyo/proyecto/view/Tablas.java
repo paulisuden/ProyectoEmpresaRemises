@@ -41,6 +41,7 @@ public class Tablas extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        btVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 51, 51));
@@ -87,6 +88,13 @@ public class Tablas extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Tablas de reservas y clientes:");
 
+        btVolver.setText("Volver");
+        btVolver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btVolverMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,8 +108,11 @@ public class Tablas extends javax.swing.JFrame {
                             .addComponent(jScrollPane2)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(405, 405, 405)
-                        .addComponent(jLabel1)))
-                .addContainerGap(331, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(btVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +123,9 @@ public class Tablas extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(btVolver)
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -138,6 +151,10 @@ public class Tablas extends javax.swing.JFrame {
             System.out.println(res.toString());
         }
     }//GEN-LAST:event_tblReservaMouseClicked
+
+    private void btVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btVolverMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_btVolverMouseClicked
 
     /**
      * @param args the command line arguments
@@ -169,7 +186,9 @@ public class Tablas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Tablas().setVisible(true);
+                Tablas tablas = new Tablas();
+                tablas.setVisible(true);
+                tablas.setLocationRelativeTo(null);
             }
         });
     }
@@ -191,6 +210,7 @@ public class Tablas extends javax.swing.JFrame {
     private ReservaTableModel reservaModel;
     private ClienteTableModel clienteModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -60,4 +60,8 @@ public class ReservaController {
     public ReservaController() {
         reservadao = new ReservaDAOImp();
     }
+    
+    public Long ultimoCodReserva() {
+        return reservadao.ultimoCodReserva();
+    }
 }

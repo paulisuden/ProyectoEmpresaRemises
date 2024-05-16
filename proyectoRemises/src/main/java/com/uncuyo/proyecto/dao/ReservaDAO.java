@@ -14,6 +14,7 @@ public interface ReservaDAO {
     public void eliminarReserva(long cod_reserva);
     public Reserva getReserva(Long id);
     public List<Reserva> getReservas();
+    public  Long ultimoCodReserva();
 }
     
     

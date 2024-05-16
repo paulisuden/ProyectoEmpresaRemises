@@ -6,6 +6,7 @@
 package com.uncuyo.proyecto.dao;
 
 
+import com.uncuyo.proyecto.controller.ReservaController;
 import com.uncuyo.proyecto.model.Cliente;
 import com.uncuyo.proyecto.model.Reserva;
 import java.util.List;
@@ -29,6 +30,8 @@ public class ReservaDAOImp implements ReservaDAO {
         List<Reserva> reservas = reservadao.getReservas();
         for(Reserva v:reservas){
             System.out.println(v.toString());
+        
+   
         }
     }
     
@@ -68,8 +71,9 @@ public class ReservaDAOImp implements ReservaDAO {
             if (reserva != null) {
                 em.remove(reserva);
                 em.getTransaction().commit();
+                System.out.println("BORRADOOOOOOOOOOOOOOOOOOO DAOIMP");
             } else {
-                System.out.println("La reserva con código " + cod_reserva + " no existe.");
+                System.out.println("La reserva con codigo " + cod_reserva + " no existe.");
             }
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
@@ -81,13 +85,21 @@ public class ReservaDAOImp implements ReservaDAO {
         }
     }
 
-
+/**
     @Override
     public Reserva getReserva(Long id){
         EntityManager em = emf.createEntityManager();
         List<Reserva> reservas= (List<Reserva>) em.createQuery("From Reserva").getResultList();
         return reservas.getFirst(); 
-    }
+    } */
+    @Override
+    public Reserva getReserva(Long id) {
+    EntityManager em = emf.createEntityManager();
+    Reserva reserva = em.find(Reserva.class, id); // Buscar la reserva por su id
+    em.close(); // Cerrar el EntityManager cuando ya no se necesite
+    return reserva;
+}
+
     
     @Override
     public List<Reserva> getReservas() {
@@ -100,8 +112,19 @@ public class ReservaDAOImp implements ReservaDAO {
         }
         em.close();
         return reservas;
-    } 
+    }
     
+    @Override
+    public  Long ultimoCodReserva() {
+        List<Reserva> reservas;
+        ReservaController reservactrl = new ReservaController();
+        reservas = reservactrl.getReservas();
+        Reserva ultimaR; 
+        ultimaR = reservas.getLast();
+        Long ultimoC;
+        ultimoC = ultimaR.getCodReserva();
+        return ++ultimoC;  
+    }
     
     
 }

@@ -190,6 +190,7 @@ public class MainFrame extends javax.swing.JFrame {
         Reserva reserva = new Reserva(cod_reserva, destino, fechaReserva, horaReserva);
         reserva.setCliente(cliente);
         reservactrl.insertarReserva(reserva);
+        System.out.println("Reserva finalizada! Su codigo de reserva es: " + reserva.getCodReserva());
     }
    
     

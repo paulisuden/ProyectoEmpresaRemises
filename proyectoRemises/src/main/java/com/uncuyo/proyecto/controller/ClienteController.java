@@ -56,5 +56,8 @@ public class ClienteController {
     public ClienteController() {
         clientedao = new ClienteDAOImp();
     }
+    public Long ultimoCodCliente() {
+        return clientedao.ultimoCodCliente();
+    }
     
 }

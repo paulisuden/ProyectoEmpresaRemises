@@ -5,6 +5,7 @@
  */
 package com.uncuyo.proyecto.dao;
 
+import com.uncuyo.proyecto.controller.ClienteController;
 import com.uncuyo.proyecto.model.Cliente;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -101,6 +102,18 @@ private static final EntityManagerFactory emf = Persistence.createEntityManagerF
         em.close();
         return clientes;
     } 
+    
+    @Override
+    public Long ultimoCodCliente() {
+        List<Cliente> clientes;
+        ClienteController clientectrl = new ClienteController();
+        clientes = clientectrl.getClientes();
+        Cliente ultimoC; 
+        ultimoC = clientes.getLast();
+        Long ultimoCod;
+        ultimoCod = ultimoC.getCodCliente();
+        return ++ultimoCod;  
+    }
 
     
 }
