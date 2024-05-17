@@ -115,5 +115,4 @@ private static final EntityManagerFactory emf = Persistence.createEntityManagerF
         return ++ultimoCod;  
     }
 
-    
 }

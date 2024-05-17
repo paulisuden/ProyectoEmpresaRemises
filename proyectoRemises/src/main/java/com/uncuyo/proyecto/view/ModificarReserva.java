@@ -261,28 +261,26 @@ public class ModificarReserva extends javax.swing.JFrame {
         String fecha = txtFechaR.getText();
         String hora = txtHoraR.getText();
         
-        //Cambiar a su tipo:
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate fechaReserva = LocalDate.parse(fecha, dateFormatter);
+        LocalDate fecha_reserva = mainframe.verificarFecha(fecha);
+        LocalTime hora_reserva = mainframe.verificarHora(hora);
+        
+        Long cod_reserva = mainframe.verificar_cod(cod_reservaS);
+        
+        if (fecha_reserva != null && hora_reserva != null && mainframe.verificar_cod(cod_reservaS) != null) {
+            Reserva reserva = new Reserva(cod_reserva, destino, fecha_reserva, hora_reserva);
+            Cliente cliente;
+            cliente = reservactrl.modificarReserva(reserva);
 
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime horaReserva = LocalTime.parse(hora, timeFormatter);
-        
-        long cod_reserva = Long.parseLong(cod_reservaS);
-        
-        Reserva reserva = new Reserva(cod_reserva, destino, fechaReserva, horaReserva);
-        Cliente cliente;
-        cliente = reservactrl.modificarReserva(reserva);
-        
-        cliente.setCelular(celular);
-        cliente.setNombre(nombre);
-        cliente.setDni(dni);
-        cliente.setUbicacion(ubicacion);
-        clientectrl.modificarCliente(cliente);
-
-        this.dispose();
+            cliente.setCelular(celular);
+            cliente.setNombre(nombre);
+            cliente.setDni(dni);
+            cliente.setUbicacion(ubicacion);
+            clientectrl.modificarCliente(cliente);
+            this.dispose();
+        }   
     }//GEN-LAST:event_btFinalizarMouseClicked
 
+    
     private void txtCodRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCodRMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodRMouseClicked
@@ -320,12 +318,9 @@ public class ModificarReserva extends javax.swing.JFrame {
         if (txtCodR.getText().isEmpty()) {
             System.out.println("Primero ingrese el codigo de reserva");
         } else {
-            try {
-                long cod_reserva = Long.parseLong(txtCodR.getText());
-                Reserva reserva = reservactrl.getReserva(cod_reserva);
-                if (reserva == null) {
-                    System.out.println("El codigo de reserva no existe");
-                } else {
+            Long cod_reserva = mainframe.verificar_cod(txtCodR.getText());
+            if (mainframe.verificar_cod(txtCodR.getText()) != null) {
+                    Reserva reserva = reservactrl.getReserva(cod_reserva);
                     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
                     String fechaR = dateFormatter.format(reserva.getFecha());
@@ -340,15 +335,11 @@ public class ModificarReserva extends javax.swing.JFrame {
                     txtNombreC.setText(cliente.getNombre());
                     txtDniC.setText(cliente.getDni());
                     txtUbicacionC.setText(cliente.getUbicacion());
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("El codigo de reserva no es válido");
-                // Aquí puedes agregar cualquier otra acción que desees realizar cuando se produce la excepción
             }
         }
-        
     }//GEN-LAST:event_btAutocompletarMouseClicked
-
+ 
+  
     private void btCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btCancelarMouseClicked
         this.dispose();
     }//GEN-LAST:event_btCancelarMouseClicked
@@ -368,6 +359,7 @@ public class ModificarReserva extends javax.swing.JFrame {
 
     private final ReservaController reservactrl = new ReservaController();
     private final ClienteController clientectrl= new ClienteController();
+    private final MainFrame mainframe = new MainFrame();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAutocompletar;
     private javax.swing.JButton btCancelar;

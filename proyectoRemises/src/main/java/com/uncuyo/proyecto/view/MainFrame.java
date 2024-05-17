@@ -11,9 +11,9 @@ import com.uncuyo.proyecto.model.Reserva;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import javax.swing.JFrame;
-import javax.swing.table.AbstractTableModel;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -178,21 +178,61 @@ public class MainFrame extends javax.swing.JFrame {
         return cliente;
     }
     
-    public void setDatosReserva(String destino, String fecha, String hora, long cod_reserva, long cod_cliente, Cliente cliente){
-        // Convertir la fecha de tipo String a LocalDate
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate fechaReserva = LocalDate.parse(fecha, dateFormatter);
-
-        // Convertir la hora de tipo String a LocalTime
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime horaReserva = LocalTime.parse(hora, timeFormatter);
-        
-        Reserva reserva = new Reserva(cod_reserva, destino, fechaReserva, horaReserva);
-        reserva.setCliente(cliente);
-        reservactrl.insertarReserva(reserva);
-        System.out.println("Reserva finalizada! Su codigo de reserva es: " + reserva.getCodReserva());
+    public void setDatosReserva(String destino, LocalDate fecha_reserva, LocalTime hora, long cod_reserva, long cod_cliente, Cliente cliente) {
+            Reserva reserva = new Reserva(cod_reserva, destino, fecha_reserva, hora);
+            reserva.setCliente(cliente);
+            reservactrl.insertarReserva(reserva);
+            System.out.println("Reserva finalizada! Su codigo de reserva es: " + reserva.getCodReserva());
+  
+}
+    public LocalDate verificarFecha(String fecha) {
+        try {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate fechaReserva = LocalDate.parse(fecha, dateFormatter);
+            if (fechaReserva.isEqual(LocalDate.now()) || fechaReserva.isAfter(LocalDate.now())) {
+                return fechaReserva;
+            } else {
+              System.out.println("No puede ingresar una fecha pasada. Por favor, ingrese una fecha válida." ); 
+              return null;
+            }
+            
+        } catch (DateTimeParseException e) {
+            System.out.println("La fecha no es valida. Intente nuevamente. Formato: AAAA-MM-DD" );
+            return null;
+        }
     }
-   
+    //Exception in thread "AWT-EventQueue-0" java.time.format.DateTimeParseException: Text 'gfs' could not be parsed at index 0
+    public LocalTime verificarHora(String hora){
+        try {
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime hora_reserva = LocalTime.parse(hora, timeFormatter);
+            if (hora_reserva.equals(LocalTime.now()) || hora_reserva.isAfter(LocalTime.now())) {
+                return hora_reserva;
+            } else {
+              System.out.println("No puede ingresar una hora pasada o actual. Por favor, ingrese una hora válida." ); 
+                return null;
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("La hora no es valida. Intente nuevamente. Formato: HH:MM" );
+            return null;
+        }
+    }
+    
+        public Long verificar_cod(String cod) {
+        try {
+            long cod_reserva = Long.parseLong(cod);
+            Reserva reserva = reservactrl.getReserva(cod_reserva);
+            if (reserva == null) {
+                System.out.println("El codigo de reserva no existe");
+                return null;
+            } else {
+                return cod_reserva;
+            }
+        } catch (NumberFormatException e) {
+                System.out.println("El codigo de reserva no es valido");
+                return null;
+        }
+    }
     
     //private MainFrame mainframe;
     private final ReservaController reservactrl = new ReservaController();

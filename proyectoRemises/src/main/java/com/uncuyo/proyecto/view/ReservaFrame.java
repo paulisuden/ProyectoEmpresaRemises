@@ -7,9 +7,8 @@ package com.uncuyo.proyecto.view;
 import com.uncuyo.proyecto.controller.ClienteController;
 import com.uncuyo.proyecto.controller.ReservaController;
 import com.uncuyo.proyecto.model.Cliente;
-import com.uncuyo.proyecto.model.Reserva;
-import java.util.List;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  *
@@ -287,16 +286,18 @@ public class ReservaFrame extends javax.swing.JFrame {
         String destino = txtDestinoR.getText();
         String fecha = txtFechaR.getText();
         String hora = txtHoraR.getText();
-        
 
-        long cod_cliente = reservactrl.ultimoCodReserva();
-        long cod_reserva = clientectrl.ultimoCodCliente();
+        long cod_reserva = reservactrl.ultimoCodReserva();
+        long cod_cliente = clientectrl.ultimoCodCliente();
+        //System.out.println(cod_cliente);
+        LocalDate fecha_reserva = mainframe.verificarFecha(fecha);
+        LocalTime hora_reserva = mainframe.verificarHora(hora);
+        if (fecha_reserva != null && hora_reserva != null) {
+            Cliente cliente = mainframe.setDatosCliente(nombre, dni, celular, ubicacion,cod_cliente);
+            mainframe.setDatosReserva(destino, fecha_reserva, hora_reserva, cod_reserva, cod_cliente, cliente);
+            this.dispose(); 
+        }
         
-        Cliente cliente = mainframe.setDatosCliente(nombre, dni, celular, ubicacion,cod_cliente);
-        mainframe.setDatosReserva(destino, fecha, hora, cod_reserva, cod_cliente, cliente);
-        //System.out.println("Reserva finalizada! Su codigo es: );
-        
-        this.dispose();
     }//GEN-LAST:event_btFinalizarReservaMouseClicked
 
     private void btCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btCancelarMouseClicked
