@@ -12,8 +12,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.AbstractTableModel;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -22,6 +24,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        iniciarCompVisuales();
     }
 
     /**
@@ -37,16 +40,19 @@ public class MainFrame extends javax.swing.JFrame {
         btRealizarR = new javax.swing.JButton();
         btModificarR = new javax.swing.JButton();
         btCancelarR = new javax.swing.JButton();
-        btConsultarR = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         btSalir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCliente = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblReserva = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
 
         mendozaRemis.setBackground(new java.awt.Color(255, 51, 153));
-        mendozaRemis.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        mendozaRemis.setForeground(new java.awt.Color(51, 153, 0));
+        mendozaRemis.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         mendozaRemis.setText("MENDOZA REMIS");
 
         btRealizarR.setText("Realizar reserva");
@@ -70,17 +76,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        btConsultarR.setText("Consultar reservas");
-        btConsultarR.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btConsultarRMouseClicked(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 153, 0));
-        jLabel1.setText("¿Qué desear realizar?");
-
         btSalir.setText("Salir");
         btSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -88,47 +83,90 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblCliente);
+
+        tblReserva.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblReserva);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("CLIENTES");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("RESERVAS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btCancelarR)
-                    .addComponent(btRealizarR))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btModificarR)
-                    .addComponent(btConsultarR))
-                .addGap(13, 13, 13))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mendozaRemis, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(120, 120, 120))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
+                .addGap(51, 51, 51)
+                .addComponent(btRealizarR)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btCancelarR)
+                .addGap(172, 172, 172)
+                .addComponent(btModificarR)
+                .addGap(166, 166, 166)
                 .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1043, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1043, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(448, 448, 448)
+                        .addComponent(mendozaRemis, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(mendozaRemis, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btRealizarR)
-                    .addComponent(btModificarR))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCancelarR)
-                    .addComponent(btConsultarR))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(btSalir)
+                    .addComponent(btModificarR)
+                    .addComponent(btSalir))
                 .addContainerGap())
         );
 
@@ -146,10 +184,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void btModificarRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btModificarRMouseClicked
         ModificarReserva.main(new String[0]);
     }//GEN-LAST:event_btModificarRMouseClicked
-
-    private void btConsultarRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btConsultarRMouseClicked
-        Tablas.main(new String[0]);
-    }//GEN-LAST:event_btConsultarRMouseClicked
 
     private void btSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalirMouseClicked
         this.dispose(); 
@@ -182,7 +216,8 @@ public class MainFrame extends javax.swing.JFrame {
             Reserva reserva = new Reserva(cod_reserva, destino, fecha_reserva, hora);
             reserva.setCliente(cliente);
             reservactrl.insertarReserva(reserva);
-            System.out.println("Reserva finalizada! Su codigo de reserva es: " + reserva.getCodReserva());
+            JOptionPane.showMessageDialog(null, "Reserva finalizada! Su codigo de reserva es: " + reserva.getCodReserva());
+            //System.out.println("Reserva finalizada! Su codigo de reserva es: " + reserva.getCodReserva());
   
 }
     public LocalDate verificarFecha(String fecha) {
@@ -192,12 +227,14 @@ public class MainFrame extends javax.swing.JFrame {
             if (fechaReserva.isEqual(LocalDate.now()) || fechaReserva.isAfter(LocalDate.now())) {
                 return fechaReserva;
             } else {
-              System.out.println("No puede ingresar una fecha pasada. Por favor, ingrese una fecha válida." ); 
+              JOptionPane.showMessageDialog(null, "No puede ingresar una fecha pasada. Por favor, ingrese una fecha válida.");
+              //System.out.println("No puede ingresar una fecha pasada. Por favor, ingrese una fecha válida." ); 
               return null;
             }
             
         } catch (DateTimeParseException e) {
-            System.out.println("La fecha no es valida. Intente nuevamente. Formato: AAAA-MM-DD" );
+            JOptionPane.showMessageDialog(null, "La fecha no es valida. Intente nuevamente. Formato: AAAA-MM-DD");
+            //System.out.println("La fecha no es valida. Intente nuevamente. Formato: AAAA-MM-DD" );
             return null;
         }
     }
@@ -209,11 +246,13 @@ public class MainFrame extends javax.swing.JFrame {
             if (hora_reserva.equals(LocalTime.now()) || hora_reserva.isAfter(LocalTime.now())) {
                 return hora_reserva;
             } else {
-              System.out.println("No puede ingresar una hora pasada o actual. Por favor, ingrese una hora válida." ); 
+              JOptionPane.showMessageDialog(null, "No puede ingresar una hora pasada o actual. Por favor, ingrese una hora válida." );
+              //System.out.println("No puede ingresar una hora pasada o actual. Por favor, ingrese una hora válida." ); 
                 return null;
             }
         } catch (DateTimeParseException e) {
-            System.out.println("La hora no es valida. Intente nuevamente. Formato: HH:MM" );
+            JOptionPane.showMessageDialog(null, "La hora no es valida. Intente nuevamente. Formato: HH:MM\"" );
+            //System.out.println("La hora no es valida. Intente nuevamente. Formato: HH:MM" );
             return null;
         }
     }
@@ -223,27 +262,193 @@ public class MainFrame extends javax.swing.JFrame {
             long cod_reserva = Long.parseLong(cod);
             Reserva reserva = reservactrl.getReserva(cod_reserva);
             if (reserva == null) {
-                System.out.println("El codigo de reserva no existe");
+                JOptionPane.showMessageDialog(null, "El codigo de reserva no existe");
+                //System.out.println("El codigo de reserva no existe");
                 return null;
             } else {
                 return cod_reserva;
             }
         } catch (NumberFormatException e) {
-                System.out.println("El codigo de reserva no es valido");
+                JOptionPane.showMessageDialog(null, "El codigo de reserva no es valido");
+                //System.out.println("El codigo de reserva no es valido");
                 return null;
         }
     }
-    
+ 
+    public void iniciarCompVisuales(){
+        List<Reserva> reservas = reservactrl.getReservas();
+        reservaModel = new ReservaTableModel(reservas);
+        tblReserva.setModel(reservaModel);        
+        Long id =reservas.getFirst().getCodReserva();
+        Reserva reserva = reservactrl.getReserva(id);
+        List<Cliente> clientes = clientectrl.getClientes();
+        clienteModel = new ClienteTableModel(clientes);
+        tblCliente.setModel(clienteModel);        
+    }        
+        
     //private MainFrame mainframe;
     private final ReservaController reservactrl = new ReservaController();
     private final ClienteController clientectrl= new ClienteController();
+    private ReservaTableModel reservaModel;
+    private ClienteTableModel clienteModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelarR;
-    private javax.swing.JButton btConsultarR;
     private javax.swing.JButton btModificarR;
     private javax.swing.JButton btRealizarR;
     private javax.swing.JButton btSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel mendozaRemis;
+    private javax.swing.JTable tblCliente;
+    private javax.swing.JTable tblReserva;
     // End of variables declaration//GEN-END:variables
+
+}
+
+class ReservaTableModel extends AbstractTableModel {
+    private List<Reserva> reservas;
+    private final String[] columnNames = {"Codigo reserva", "Destino", "Fecha", "Hora", "Codigo cliente"};
+    private Long idClicked=-1L;
+
+    public ReservaTableModel(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
+    @Override
+    public int getRowCount() {
+        return reservas.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return columnNames.length;
+    }
+
+    //retorna el valor de una fila y columna especifica
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Reserva reserva = reservas.get(rowIndex);
+        switch (columnIndex) {
+            case 0: return reserva.getCodReserva();
+            case 1: return reserva.getDestino();
+            case 2: return reserva.getFecha();
+            case 3: return reserva.getHora();
+            case 4: return (reserva.getCliente()).getCodCliente();
+            default: return null;
+        }
+    }
+    
+    //retorna el nombre de esa columna
+    @Override
+    public String getColumnName(int column) {
+        return columnNames[column];
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return false; // Permite la edición en todas las celdas
+    }
+    
+    //establece un nuevo valor en una determinada posicion de la tabla
+    @Override
+    public void setValueAt(Object value, int rowIndex, int columnIndex) {
+        Reserva reserva = reservas.get(rowIndex);
+        switch (columnIndex) {
+            case 0: reserva.setCodReserva((Long) value); break;
+            case 1: reserva.setDestino((String) value); break;
+            case 2: reserva.setFecha((LocalDate) value); break;
+            case 3: reserva.setHora((LocalTime) value); break;
+        }
+        fireTableCellUpdated(rowIndex, columnIndex);
+    }
+
+    public void addReserva(Reserva reserva) {
+        reservas.add(reserva);
+        fireTableRowsInserted(reservas.size() - 1, reservas.size() - 1);
+    }
+
+    public void removeReserva(int rowIndex) {
+        reservas.remove(rowIndex);
+        fireTableRowsDeleted(rowIndex, rowIndex);
+    }
+
+    public void updateReserva(int rowIndex, Reserva reserva) {
+        reservas.set(rowIndex, reserva);
+        fireTableRowsUpdated(rowIndex, rowIndex);
+    }
+    
+    
+}
+class ClienteTableModel extends AbstractTableModel {
+    private List<Cliente> clientes;
+    private final String[] columnNames = {"Codigo cliente", "Nombre", "DNI", "Celular", "Ubicación"};
+    private Long idClicked=-1L;
+
+    public ClienteTableModel(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    @Override
+    public int getRowCount() {
+        return clientes.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return columnNames.length;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Cliente cliente = clientes.get(rowIndex);
+        switch (columnIndex) {
+            case 0: return cliente.getCodCliente();
+            case 1: return cliente.getNombre();
+            case 2: return cliente.getDni();
+            case 3: return cliente.getCelular();
+            case 4: return cliente.getUbicacion();
+            default: return null;
+        }
+    }
+
+    @Override
+    public String getColumnName(int column) {
+        return columnNames[column];
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return false; // Permite la edición en todas las celdas
+    }
+
+    @Override
+    public void setValueAt(Object value, int rowIndex, int columnIndex) {
+        Cliente cliente = clientes.get(rowIndex);
+        switch (columnIndex) {
+            case 0: cliente.setCodCliente((Long) value); break;
+            case 1: cliente.setNombre((String) value); break;
+            case 2: cliente.setDni((String) value); break;
+            case 3: cliente.setCelular((String) value); break;
+            case 4: cliente.setUbicacion((String) value); break;
+        }
+        fireTableCellUpdated(rowIndex, columnIndex);
+    }
+
+    public void addCliente(Cliente cliente) {
+        clientes.add(cliente);
+        fireTableRowsInserted(clientes.size() - 1, clientes.size() - 1);
+    }
+
+    public void removeCliente(int rowIndex) {
+        clientes.remove(rowIndex);
+        fireTableRowsDeleted(rowIndex, rowIndex);
+    }
+
+    public void updateCliente(int rowIndex, Cliente cliente) {
+        clientes.set(rowIndex, cliente);
+        fireTableRowsUpdated(rowIndex, rowIndex);
+    }
+    
 }

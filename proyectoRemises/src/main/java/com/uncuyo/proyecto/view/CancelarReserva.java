@@ -6,6 +6,7 @@ package com.uncuyo.proyecto.view;
 
 import com.uncuyo.proyecto.controller.ReservaController;
 import com.uncuyo.proyecto.model.Reserva;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,9 +29,11 @@ public class CancelarReserva extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btCancelar = new javax.swing.JButton();
         btVolver = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Cancelación de reserva");
 
         jLabel2.setText("Ingrese el código de reserva:");
@@ -49,42 +52,51 @@ public class CancelarReserva extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Para cancelar su reserva, solo debe ingresar el codigo que se genero cuando finalizo dicha reserva");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCodR, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3)
+                        .addContainerGap(36, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
                         .addComponent(btVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(14, 14, 14))
+                        .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(238, 238, 238)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtCodR, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(283, 283, 283))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel3)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btCancelar)
-                    .addComponent(btVolver))
-                .addGap(23, 23, 23))
+                    .addComponent(btVolver)
+                    .addComponent(btCancelar))
+                .addGap(41, 41, 41))
         );
 
         pack();
@@ -92,20 +104,25 @@ public class CancelarReserva extends javax.swing.JFrame {
 
     private void btCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btCancelarMouseClicked
         if (txtCodR.getText().isEmpty()) {
-            System.out.println("Primero ingrese el codigo de reserva");
+            JOptionPane.showMessageDialog(null, "Primero ingrese el codigo de reserva");
+            //System.out.println("Primero ingrese el codigo de reserva");
         } else {
             try {
                 long cod_reserva = Long.parseLong(txtCodR.getText());
                 Reserva reserva = reservactrl.getReserva(cod_reserva);
+                System.out.println(reserva);
                 if (reserva == null) {
-                    System.out.println("El codigo de reserva no existe");
+                    JOptionPane.showMessageDialog(null, "El codigo de reserva no existe");
+                    //System.out.println("El codigo de reserva no existe");
                 } else {
                     reservactrl.eliminarReserva(cod_reserva);
-                    System.out.println("La reserva se ha eliminado correctamente");
+                    JOptionPane.showMessageDialog(null, "La reserva se ha eliminado correctamente");
+                    //System.out.println("La reserva se ha eliminado correctamente");
                     this.dispose();
                 }
             } catch (NumberFormatException e) {
-                System.out.println("El codigo de reserva no es válido");
+                JOptionPane.showMessageDialog(null, "El codigo de reserva no es válido");
+                //System.out.println("El codigo de reserva no es válido");
             }
         }
 
@@ -158,6 +175,7 @@ public class CancelarReserva extends javax.swing.JFrame {
     private javax.swing.JButton btVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtCodR;
     // End of variables declaration//GEN-END:variables
 }

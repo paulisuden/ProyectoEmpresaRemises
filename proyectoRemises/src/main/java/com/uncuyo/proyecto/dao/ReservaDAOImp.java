@@ -16,7 +16,7 @@ import javax.persistence.Persistence;
 
 
 public class ReservaDAOImp implements ReservaDAO {
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Persistencia");   
+private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Persistencia");   
 
     public static void main(String[] args) {
         ReservaDAO reservadao = new ReservaDAOImp();
@@ -69,9 +69,9 @@ public class ReservaDAOImp implements ReservaDAO {
             em.getTransaction().begin();
             Reserva reserva = em.find(Reserva.class, cod_reserva);
             if (reserva != null) {
+                em.merge(reserva);
                 em.remove(reserva);
                 em.getTransaction().commit();
-                System.out.println("BORRADOOOOOOOOOOOOOOOOOOO DAOIMP");
             } else {
                 System.out.println("La reserva con codigo " + cod_reserva + " no existe.");
             }
@@ -79,7 +79,7 @@ public class ReservaDAOImp implements ReservaDAO {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            e.printStackTrace(); // Manejar la excepción adecuadamente según los requisitos de tu aplicación
+            e.printStackTrace(); 
         } finally {
             em.close();
         }

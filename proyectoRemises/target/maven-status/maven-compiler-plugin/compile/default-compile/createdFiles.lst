@@ -6,7 +6,6 @@ com\uncuyo\proyecto\view\ReservaFrame$2.class
 com\uncuyo\proyecto\view\ReservaFrame$8.class
 com\uncuyo\proyecto\view\MainFrame$4.class
 com\uncuyo\proyecto\view\ReservaFrame.class
-com\uncuyo\proyecto\view\Tablas$2.class
 com\uncuyo\proyecto\model\Cliente.class
 com\uncuyo\proyecto\view\ModificarReserva$3.class
 com\uncuyo\proyecto\view\ModificarReserva$6.class
@@ -16,8 +15,8 @@ com\uncuyo\proyecto\view\ReservaFrame$5.class
 com\uncuyo\proyecto\view\ModificarReserva$5.class
 com\uncuyo\proyecto\view\ReservaFrame$6.class
 com\uncuyo\proyecto\dao\ReservaDAO.class
+com\uncuyo\proyecto\view\ModificarReserva$13.class
 com\uncuyo\proyecto\view\ReservaFrame$14.class
-com\uncuyo\proyecto\view\Tablas$1.class
 com\uncuyo\proyecto\view\ReservaFrame$10.class
 com\uncuyo\proyecto\view\MainFrame$3.class
 com\uncuyo\proyecto\view\ReservaFrame$9.class
@@ -26,7 +25,6 @@ com\uncuyo\proyecto\dao\ClienteDAO.class
 com\uncuyo\proyecto\view\CancelarReserva.class
 com\uncuyo\proyecto\view\CancelarReserva$1.class
 com\uncuyo\proyecto\pdf\Main.class
-com\uncuyo\proyecto\view\MainFrame$5.class
 com\uncuyo\proyecto\view\ModificarReserva$4.class
 com\uncuyo\proyecto\view\ModificarReserva$10.class
 com\uncuyo\proyecto\view\ReservaFrame$3.class
@@ -35,7 +33,6 @@ com\uncuyo\proyecto\view\ReservaTableModel.class
 com\uncuyo\proyecto\view\ReservaFrame$13.class
 com\uncuyo\proyecto\model\Reserva.class
 com\uncuyo\proyecto\view\ModificarReserva$8.class
-com\uncuyo\proyecto\view\Tablas.class
 com\uncuyo\proyecto\view\ModificarReserva$1.class
 com\uncuyo\proyecto\view\ModificarReserva$11.class
 com\uncuyo\proyecto\view\ReservaFrame$16.class
@@ -50,7 +47,6 @@ com\uncuyo\proyecto\view\ClienteTableModel.class
 com\uncuyo\proyecto\view\CancelarReserva$2.class
 com\uncuyo\proyecto\view\ReservaFrame$12.class
 com\uncuyo\proyecto\view\ReservaFrame$1.class
-com\uncuyo\proyecto\view\Tablas$3.class
 com\uncuyo\proyecto\view\ModificarReserva$7.class
 com\uncuyo\proyecto\view\ReservaFrame$15.class
 com\uncuyo\proyecto\view\ModificarReserva$12.class
