@@ -58,6 +58,12 @@
     <version>2.0.24</version> <!-- O la versión más reciente -->
     </dependency>
 
+    <!--iText -->
+    <dependency>
+        <groupId>com.itextpdf</groupId>
+        <artifactId>itextpdf</artifactId>
+        <version>5.5.13.2</version>
+    </dependency>
 
     
 
