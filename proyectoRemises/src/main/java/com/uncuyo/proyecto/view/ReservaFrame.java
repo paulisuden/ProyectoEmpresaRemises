@@ -300,12 +300,20 @@ public class ReservaFrame extends javax.swing.JFrame {
         long cod_reserva = reservactrl.ultimoCodReserva();
         long cod_cliente = clientectrl.ultimoCodCliente();
         //System.out.println(cod_cliente);
+        
         LocalDate fecha_reserva = mainframe.verificarFecha(fecha);
-        LocalTime hora_reserva = mainframe.verificarHora(hora);
+        LocalTime hora_reserva;
+        if (fecha_reserva.isEqual(LocalDate.now())) {
+            hora_reserva = mainframe.verificarHora(hora, true); 
+        } else {
+            hora_reserva = mainframe.verificarHora(hora, false);   
+        } 
+        
         if (fecha_reserva != null && hora_reserva != null) {
             Cliente cliente = mainframe.setDatosCliente(nombre, dni, celular, ubicacion,cod_cliente);
             mainframe.setDatosReserva(destino, fecha_reserva, hora_reserva, cod_reserva, cod_cliente, cliente);
             this.dispose(); 
+            MainFrame.main(new String[0]); 
         }
         
     }//GEN-LAST:event_btFinalizarReservaMouseClicked

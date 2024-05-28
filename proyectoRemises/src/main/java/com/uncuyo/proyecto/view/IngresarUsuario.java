@@ -28,14 +28,17 @@ public class IngresarUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPasswordField1 = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         txtBase = new javax.swing.JTextField();
-        txtContrasenia = new javax.swing.JTextField();
         btIngresar = new javax.swing.JButton();
+        txtContrasenia = new javax.swing.JPasswordField();
+
+        jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,17 +71,22 @@ public class IngresarUsuario extends javax.swing.JFrame {
             }
         });
 
-        txtContrasenia.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtContraseniaMouseClicked(evt);
-            }
-        });
-
         btIngresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btIngresar.setText("Ingresar");
         btIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btIngresarMouseClicked(evt);
+            }
+        });
+
+        txtContrasenia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtContraseniaMouseClicked(evt);
+            }
+        });
+        txtContrasenia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContraseniaActionPerformed(evt);
             }
         });
 
@@ -96,9 +104,9 @@ public class IngresarUsuario extends javax.swing.JFrame {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(86, 86, 86)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                                    .addComponent(txtContrasenia)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(73, 73, 73)
@@ -144,10 +152,6 @@ public class IngresarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioMouseClicked
 
-    private void txtContraseniaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraseniaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseniaMouseClicked
-
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
@@ -172,6 +176,14 @@ public class IngresarUsuario extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Base de datos incorrecta " + base);
     }  
     }//GEN-LAST:event_btIngresarMouseClicked
+
+    private void txtContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraseniaActionPerformed
+
+    private void txtContraseniaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraseniaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraseniaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -214,8 +226,9 @@ public class IngresarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField txtBase;
-    private javax.swing.JTextField txtContrasenia;
+    private javax.swing.JPasswordField txtContrasenia;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

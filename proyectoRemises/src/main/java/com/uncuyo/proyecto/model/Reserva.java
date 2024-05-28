@@ -26,6 +26,8 @@ public class Reserva {
     private Long cod_reserva;
     @Column(name="destino")
     private String destino;
+    @Column(name="existe")
+    private Boolean existe;
     @Column(name="fecha")
     private LocalDate fecha;
     @Column(name="hora")
@@ -34,11 +36,12 @@ public class Reserva {
     @JoinColumn(name="cod_cliente")
     private Cliente cliente;
 
-    public Reserva(Long cod_reserva, String destino, LocalDate fecha, LocalTime hora) {
+    public Reserva(Long cod_reserva, String destino, LocalDate fecha, LocalTime hora, Boolean existe) {
         this.cod_reserva = cod_reserva;
         this.destino = destino;
         this.fecha = fecha;
         this.hora = hora;
+        this.existe = existe;
     }
 
     public Reserva() {
@@ -94,6 +97,14 @@ public class Reserva {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Boolean getExiste() {
+        return existe;
+    }
+
+    public void setExiste(Boolean existe) {
+        this.existe = existe;
     }
 
 

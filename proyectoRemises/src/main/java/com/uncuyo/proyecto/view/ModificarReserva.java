@@ -270,12 +270,19 @@ public class ModificarReserva extends javax.swing.JFrame {
         String hora = txtHoraR.getText();
         
         LocalDate fecha_reserva = mainframe.verificarFecha(fecha);
-        LocalTime hora_reserva = mainframe.verificarHora(hora);
+        
+        LocalTime hora_reserva;
+        if (fecha_reserva.isEqual(LocalDate.now())) {
+            hora_reserva = mainframe.verificarHora(hora, true); 
+        } else {
+            hora_reserva = mainframe.verificarHora(hora, false);   
+        }  
+      
         
         Long cod_reserva = mainframe.verificar_cod(cod_reservaS);
         
         if (fecha_reserva != null && hora_reserva != null && mainframe.verificar_cod(cod_reservaS) != null) {
-            Reserva reserva = new Reserva(cod_reserva, destino, fecha_reserva, hora_reserva);
+            Reserva reserva = new Reserva(cod_reserva, destino, fecha_reserva, hora_reserva, true);
             Cliente cliente;
             cliente = reservactrl.modificarReserva(reserva);
 
@@ -285,6 +292,8 @@ public class ModificarReserva extends javax.swing.JFrame {
             cliente.setUbicacion(ubicacion);
             clientectrl.modificarCliente(cliente);
             this.dispose();
+            JOptionPane.showMessageDialog(null, "Reserva modificada!");
+            MainFrame.main(new String[0]); 
         }   
     }//GEN-LAST:event_btFinalizarMouseClicked
 

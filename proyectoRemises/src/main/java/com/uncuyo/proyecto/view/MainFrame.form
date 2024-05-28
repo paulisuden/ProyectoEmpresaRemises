@@ -97,7 +97,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="442" max="-2" attributes="0"/>
                       <Component id="mendozaRemis" min="-2" pref="212" max="-2" attributes="0"/>
-                      <EmptySpace pref="389" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="93" max="32767" attributes="0"/>

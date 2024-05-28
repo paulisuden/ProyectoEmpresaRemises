@@ -119,6 +119,7 @@ public class CancelarReserva extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "La reserva se ha eliminado correctamente");
                     //System.out.println("La reserva se ha eliminado correctamente");
                     this.dispose();
+                    MainFrame.main(new String[0]);
                 }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "El codigo de reserva no es válido");

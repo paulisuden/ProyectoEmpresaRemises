@@ -20,19 +20,11 @@ private static final EntityManagerFactory emf = Persistence.createEntityManagerF
 
     public static void main(String[] args) {
         ReservaDAO reservadao = new ReservaDAOImp();
-        /**Reserva reserva = new Reserva();
-        reserva.setCodReserva(1L);
-        reserva.setDestino("Regatas Mendoza");
-        reserva.setFecha(LocalDate.parse("2024-05-11"));
-        reserva.setHora(LocalTime.of(15, 30)); //15:30hs
-        reservadao.insertarReserva(reserva);*/
-        
+        /**
         List<Reserva> reservas = reservadao.getReservas();
         for(Reserva v:reservas){
             System.out.println(v.toString());
-        
-   
-        }
+        }*/
     }
     
     @Override
@@ -69,6 +61,29 @@ private static final EntityManagerFactory emf = Persistence.createEntityManagerF
             em.getTransaction().begin();
             Reserva reserva = em.find(Reserva.class, cod_reserva);
             if (reserva != null) {
+                reserva.setExiste(false);
+                em.getTransaction().commit();
+            } else {
+                System.out.println("La reserva con codigo " + cod_reserva + " no existe.");
+            }
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace(); 
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+    @Override
+    public void eliminarReserva(long cod_reserva) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Reserva reserva = em.find(Reserva.class, cod_reserva);
+            if (reserva != null) {
                 em.merge(reserva);
                 em.remove(reserva);
                 em.getTransaction().commit();
@@ -84,7 +99,7 @@ private static final EntityManagerFactory emf = Persistence.createEntityManagerF
             em.close();
         }
     }
-
+*/ 
 /**
     @Override
     public Reserva getReserva(Long id){

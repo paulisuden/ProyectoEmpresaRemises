@@ -184,8 +184,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1043, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(442, 442, 442)
-                        .addComponent(mendozaRemis, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 389, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(mendozaRemis, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -217,14 +216,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btCancelarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarRActionPerformed
         CancelarReserva.main(new String[0]);
+        this.dispose();
     }//GEN-LAST:event_btCancelarRActionPerformed
 
     private void btRealizarRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btRealizarRMouseClicked
         ReservaFrame.main(new String[0]); 
+        this.dispose();
     }//GEN-LAST:event_btRealizarRMouseClicked
 
     private void btModificarRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btModificarRMouseClicked
         ModificarReserva.main(new String[0]);
+        this.dispose();
     }//GEN-LAST:event_btModificarRMouseClicked
 
     private void btSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalirMouseClicked
@@ -263,7 +265,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     public void setDatosReserva(String destino, LocalDate fecha_reserva, LocalTime hora, long cod_reserva, long cod_cliente, Cliente cliente) {
-            Reserva reserva = new Reserva(cod_reserva, destino, fecha_reserva, hora);
+            Reserva reserva = new Reserva(cod_reserva, destino, fecha_reserva, hora, true);
             reserva.setCliente(cliente);
             reservactrl.insertarReserva(reserva);
             JOptionPane.showMessageDialog(null, "Reserva finalizada! Su codigo de reserva es: " + reserva.getCodReserva());
@@ -289,16 +291,20 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     //Exception in thread "AWT-EventQueue-0" java.time.format.DateTimeParseException: Text 'gfs' could not be parsed at index 0
-    public LocalTime verificarHora(String hora){
+    public LocalTime verificarHora(String hora, Boolean hoy){
         try {
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime hora_reserva = LocalTime.parse(hora, timeFormatter);
-            if (hora_reserva.equals(LocalTime.now()) || hora_reserva.isAfter(LocalTime.now())) {
+            if (hora_reserva.isAfter(LocalTime.now())) {
                 return hora_reserva;
             } else {
-              JOptionPane.showMessageDialog(null, "No puede ingresar una hora pasada o actual. Por favor, ingrese una hora válida." );
-              //System.out.println("No puede ingresar una hora pasada o actual. Por favor, ingrese una hora válida." ); 
-                return null;
+                if (hoy == true) {
+                JOptionPane.showMessageDialog(null, "No puede ingresar una hora pasada o actual. Por favor, ingrese una hora válida." );
+                //System.out.println("No puede ingresar una hora pasada o actual. Por favor, ingrese una hora válida." ); 
+                  return null;
+                } else {
+                    return hora_reserva;
+                }
             }
         } catch (DateTimeParseException e) {
             JOptionPane.showMessageDialog(null, "La hora no es valida. Intente nuevamente. Formato: HH:MM\"" );
@@ -369,7 +375,7 @@ public class MainFrame extends javax.swing.JFrame {
 
 class ReservaTableModel extends AbstractTableModel {
     private List<Reserva> reservas;
-    private final String[] columnNames = {"Codigo reserva", "Destino", "Fecha", "Hora", "Codigo cliente"};
+    private final String[] columnNames = {"Codigo reserva", "Destino", "Fecha", "Hora", "Codigo cliente", "Existe"};
     private Long idClicked=-1L;
 
     public ReservaTableModel(List<Reserva> reservas) {
@@ -396,6 +402,7 @@ class ReservaTableModel extends AbstractTableModel {
             case 2: return reserva.getFecha();
             case 3: return reserva.getHora();
             case 4: return (reserva.getCliente()).getCodCliente();
+            case 5: return reserva.getExiste();
             default: return null;
         }
     }
