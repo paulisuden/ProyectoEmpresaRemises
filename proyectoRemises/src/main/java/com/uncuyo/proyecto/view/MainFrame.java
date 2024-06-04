@@ -19,6 +19,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+
 public class MainFrame extends javax.swing.JFrame {
 
     /**
@@ -80,9 +85,10 @@ public class MainFrame extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 0));
 
         mendozaRemis.setBackground(new java.awt.Color(255, 51, 153));
-        mendozaRemis.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        mendozaRemis.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         mendozaRemis.setText("MENDOZA REMIS");
 
+        btRealizarR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btRealizarR.setText("Realizar reserva");
         btRealizarR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -90,6 +96,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btModificarR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btModificarR.setText("Modificar reserva");
         btModificarR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -97,6 +104,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btCancelarR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btCancelarR.setText("Cancelar reserva");
         btCancelarR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +112,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btSalir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btSalir.setText("Salir");
         btSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -137,12 +146,13 @@ public class MainFrame extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblReserva);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("CLIENTES");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("RESERVAS");
 
+        btExportar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btExportar.setText("Exportar datos");
         btExportar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -150,6 +160,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btReporte.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btReporte.setText("Generar reporte");
         btReporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -164,43 +175,42 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(btRealizarR)
-                .addGap(72, 72, 72)
+                .addGap(56, 56, 56)
                 .addComponent(btCancelarR)
-                .addGap(87, 87, 87)
+                .addGap(69, 69, 69)
                 .addComponent(btModificarR)
-                .addGap(90, 90, 90)
+                .addGap(70, 70, 70)
                 .addComponent(btReporte)
-                .addGap(91, 91, 91)
+                .addGap(62, 62, 62)
                 .addComponent(btExportar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+                .addGap(110, 110, 110)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1043, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1043, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(442, 442, 442)
-                        .addComponent(mendozaRemis, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(93, Short.MAX_VALUE))
+                        .addGap(363, 363, 363)
+                        .addComponent(mendozaRemis, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mendozaRemis, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(mendozaRemis, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btRealizarR)
                     .addComponent(btCancelarR)
@@ -243,6 +253,13 @@ public class MainFrame extends javax.swing.JFrame {
 
 
     public static void main(String[] args) {
+        
+        try {
+            // Establece el Look and Feel Cupertino Dark
+            UIManager.setLookAndFeel(new FlatMacDarkLaf());
+        } catch (UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        }
          // Crear una instancia de MainFrame
         MainFrame mainFrame = new MainFrame();
        

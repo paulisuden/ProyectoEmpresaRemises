@@ -64,6 +64,13 @@
         <artifactId>itextpdf</artifactId>
         <version>5.5.13.2</version>
     </dependency>
+    
+    <!--FlatLaf -->
+    <dependency>
+        <groupId>com.formdev</groupId>
+        <artifactId>flatlaf</artifactId>
+        <version>3.4.1</version>
+     </dependency>
 
     
 

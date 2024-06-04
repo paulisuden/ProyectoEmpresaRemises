@@ -4,6 +4,7 @@
  */
 package com.uncuyo.proyecto.view;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.uncuyo.proyecto.controller.ClienteController;
 import com.uncuyo.proyecto.controller.ReservaController;
 import com.uncuyo.proyecto.model.Cliente;
@@ -12,6 +13,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -360,6 +363,7 @@ public class ModificarReserva extends javax.swing.JFrame {
   
     private void btCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btCancelarMouseClicked
         this.dispose();
+        MainFrame.main(new String[0]);
     }//GEN-LAST:event_btCancelarMouseClicked
 
     private void btAutocompletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAutocompletarActionPerformed
@@ -370,6 +374,11 @@ public class ModificarReserva extends javax.swing.JFrame {
     
 
     public static void main(String args[]) {
+        try {
+            UIManager.setLookAndFeel(new FlatMacDarkLaf());
+        } catch (UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ModificarReserva modificar = new ModificarReserva();
